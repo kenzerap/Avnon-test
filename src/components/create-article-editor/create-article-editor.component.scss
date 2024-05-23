@@ -1,0 +1,33 @@
+.btn {
+  margin-top: 2rem;
+}
+
+.toolbar {
+  position: absolute;
+  display: none;
+  grid-template-columns: 2rem auto;
+  align-items: center;
+  z-index: 1;
+}
+
+.btn-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.btn-bar {
+  display: grid;
+  width: 30rem;
+  grid-template-columns: auto auto auto;
+  justify-content: space-around;
+  background-color: #e9e8e8;
+}
+
+.text-align {
+  text-align: center;
+}

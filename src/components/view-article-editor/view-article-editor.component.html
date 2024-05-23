@@ -1,0 +1,8 @@
+<h1>
+  View article editor
+</h1>
+
+<div *ngIf="(article$ | async) as item">
+  <h2>{{item.title}}</h2>
+  <div [innerHTML]="item.content"></div>
+</div>

@@ -1,0 +1,43 @@
+<h1>
+  Create article editor
+</h1>
+<form [formGroup]="form" class="text-align">
+  <input type="text" placeholder="Type title" formControlName="title" class="text-title" #articleTitle>
+  <quill-editor formControlName="editor" (onFocus)="checkShowToolbar()" (onEditorCreated)="initEditor()">
+  </quill-editor>
+
+  <div class="toolbar" #toolbar>
+    <span class="material-icons cursor-pointer" *ngIf="!isExpand" (click)="toolbarToggle()">
+      control_point
+    </span>
+
+    <span class="material-icons cursor-pointer" (click)="toolbarToggle()" *ngIf="isExpand">
+      close
+    </span>
+
+    <div class="btn-bar" *ngIf="isExpand">
+      <div class="btn-item" (click)="uploadImage()">
+        <span class="material-icons">
+          control_point
+        </span>
+        Image
+      </div>
+      <div class="btn-item">
+        <span class="material-icons">
+          control_point
+        </span>
+        Video
+      </div>
+      <div class="btn-item">
+        <span class="material-icons">
+          control_point
+        </span>
+        Link
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="text-align">
+  <button mat-flat-button color="primary" class="btn" [disabled]="!form.valid" (click)="submitForm()">Publish</button>
+</div>

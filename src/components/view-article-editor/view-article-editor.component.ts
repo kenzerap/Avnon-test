@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { selectArticle } from '../../store/app.selectors';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'app-view-article-editor',
@@ -13,7 +15,20 @@ import { CommonModule } from '@angular/common';
 })
 export class ViewArticleEditorComponent implements OnInit {
   article$ = this.store.pipe(select(selectArticle));
-  constructor(private store: Store) {}
+  article: any = null;
+  constructor(private store: Store, private sanitized: DomSanitizer) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.article$
+      .pipe(
+        take(1),
+        filter((item) => !!item)
+      )
+      .subscribe((item) => {
+        this.article = {
+          ...item,
+          content: this.sanitized.bypassSecurityTrustHtml(item.content),
+        };
+      });
+  }
 }

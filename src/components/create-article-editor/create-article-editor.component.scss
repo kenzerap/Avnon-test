@@ -2,21 +2,43 @@
   margin-top: 2rem;
 }
 
+.text-align {
+  text-align: center;
+}
+
+.editor-container {
+  padding: 2rem 5rem;
+  border: 1px solid;
+  margin: 0 1rem;
+}
+
+.placeholder-text {
+  position: absolute;
+  opacity: 0.5;
+  top: 5px;
+  pointer-events: none;
+}
+
+.outline-none {
+  outline: 0;
+}
+
+.content-section {
+  min-height: 20rem;
+}
+
 .toolbar {
   position: absolute;
   display: none;
   grid-template-columns: 2rem auto;
   align-items: center;
   z-index: 1;
+  left: -30px;
 }
 
 .btn-item {
   display: flex;
   align-items: center;
-  cursor: pointer;
-}
-
-.cursor-pointer {
   cursor: pointer;
 }
 
@@ -28,6 +50,8 @@
   background-color: #e9e8e8;
 }
 
-.text-align {
-  text-align: center;
+.img-tooltip {
+  display: none;
+  position: absolute;
+  height: 2.5rem;
 }

@@ -1,43 +1,105 @@
 <h1>
   Create article editor
 </h1>
-<form [formGroup]="form" class="text-align">
-  <input type="text" placeholder="Type title" formControlName="title" class="text-title" #articleTitle>
-  <quill-editor formControlName="editor" (onFocus)="checkShowToolbar()" (onEditorCreated)="initEditor()">
-  </quill-editor>
 
-  <div class="toolbar" #toolbar>
-    <span class="material-icons cursor-pointer" *ngIf="!isExpand" (click)="toolbarToggle()">
-      control_point
-    </span>
+<form [formGroup]="form">
+  <div class="editor-container">
+    <div class="position-relative">
+      <h1
+        contenteditable="true"
+        class="outline-none"
+        #articleTitle
+        (input)="onTitleChange($event)"
+      ></h1>
+      <span
+        class="placeholder-text"
+        *ngIf="!form.controls.title.value"
+      >Type title...</span>
+    </div>
+    <div class="position-relative">
+      <div
+        class="img-tooltip"
+        #imgTooltip
+        (mouseenter)="setImgTooltipHover(true)"
+        (mouseleave)="imgTooltipMouseOut()"
+      ><app-image-component (selectSizeOption)="selectSizeOption($event)"></app-image-component></div>
 
-    <span class="material-icons cursor-pointer" (click)="toolbarToggle()" *ngIf="isExpand">
-      close
-    </span>
+      <div
+        contenteditable="true"
+        class="content-section outline-none"
+        #articleContent
+        (input)="onContentChange($event)"
+        (focus)="checkShowToolbar()"
+      >
+      </div>
 
-    <div class="btn-bar" *ngIf="isExpand">
-      <div class="btn-item" (click)="uploadImage()">
-        <span class="material-icons">
+      <div
+        class="toolbar"
+        #toolbar
+      >
+        <span
+          class="material-icons cursor-pointer"
+          *ngIf="!isExpand"
+          (click)="toolbarToggle()"
+        >
           control_point
         </span>
-        Image
-      </div>
-      <div class="btn-item">
-        <span class="material-icons">
-          control_point
+
+        <span
+          class="material-icons cursor-pointer"
+          (click)="toolbarToggle()"
+          *ngIf="isExpand"
+        >
+          close
         </span>
-        Video
+
+        <div
+          class="btn-bar"
+          *ngIf="isExpand"
+        >
+          <div
+            class="btn-item"
+            (click)="uploadInput.click()"
+          >
+            <span class="material-icons">
+              control_point
+            </span>
+            Image
+          </div>
+          <div class="btn-item">
+            <span class="material-icons">
+              control_point
+            </span>
+            Video
+          </div>
+          <div class="btn-item">
+            <span class="material-icons">
+              control_point
+            </span>
+            Link
+          </div>
+        </div>
       </div>
-      <div class="btn-item">
-        <span class="material-icons">
-          control_point
-        </span>
-        Link
-      </div>
+
+      <input
+        type="file"
+        style="display:none"
+        accept="image/png, image/jpeg"
+        (change)="uploadImage($event)"
+        #uploadInput
+      >
     </div>
   </div>
 </form>
 
+
+
 <div class="text-align">
-  <button mat-flat-button color="primary" class="btn" [disabled]="!form.valid" (click)="submitForm()">Publish</button>
+  <button
+    mat-flat-button
+    color="primary"
+    class="btn"
+    [disabled]="!form.valid"
+    (click)="submitForm()"
+  >Publish</button>
 </div>

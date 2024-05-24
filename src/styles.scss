@@ -16,35 +16,10 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.ql-editor {
-  padding: 12px 30px;
-  min-height: 20rem;
+.cursor-pointer {
+  cursor: pointer;
 }
 
-.text-title {
-  display: none;
-}
-
-.ql-editor::before {
-  left: 30px !important;
-  right: 30px !important;
-}
-
-.ql-container .text-title {
-  display: unset;
-  width: 100%;
-  margin-top: 12px;
-  padding: 0 30px;
-  border: none;
-  height: 2rem;
-  font-size: 1.5rem;
-}
-
-.ql-container .text-title:focus-visible {
-  outline: none;
-}
-
-.image {
-  width: 40%;
-  height: auto;
+.position-relative {
+  position: relative;
 }

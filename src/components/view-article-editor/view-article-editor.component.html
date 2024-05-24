@@ -2,7 +2,13 @@
   View article editor
 </h1>
 
-<div *ngIf="(article$ | async) as item">
-  <h2>{{item.title}}</h2>
-  <div [innerHTML]="item.content"></div>
+<div
+  *ngIf="article"
+  class="editor-container"
+>
+  <h1>{{article.title}}</h1>
+  <div
+    [innerHTML]="article.content"
+    class="position-relative"
+  ></div>
 </div>

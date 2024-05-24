@@ -1,0 +1,16 @@
+.tool-bar {
+  position: relative;
+  background-color: black;
+  color: white;
+  width: 10rem;
+  height: 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.arror-down {
+  position: absolute;
+  bottom: -14.4px;
+  color: black;
+}

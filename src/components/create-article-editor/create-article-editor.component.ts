@@ -58,6 +58,8 @@ export class CreateArticleEditorComponent implements OnInit, OnDestroy {
   isImgTooltipHover = false;
   mediumEditor: any = null;
   currentImgHover!: HTMLElement;
+  imgDragId = '';
+  imgDragElement!: HTMLElement;
 
   form = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -86,6 +88,48 @@ export class CreateArticleEditorComponent implements OnInit, OnDestroy {
   onContentChange(event: Event) {
     this.form.controls.editor.setValue((event.target as HTMLElement).innerHTML);
     this.checkShowToolbar();
+  }
+
+  drag(event: Event) {
+    const element = event.target as HTMLElement;
+    if (element.nodeName === 'IMG') {
+      this.imgDragId = element.id;
+      this.imgDragElement = element;
+    }
+  }
+
+  drop(event: any) {
+    event.toElement;
+    setTimeout(() => {
+      const imgElements = document.getElementsByTagName('img');
+      let newImgElement = null;
+      for (let index = 0; index < imgElements.length; index++) {
+        if (!imgElements[index].id) {
+          newImgElement = imgElements[index];
+          break;
+        }
+      }
+
+      if (newImgElement) {
+        const pTag = newImgElement.nextSibling?.parentElement;
+        const previousSibling = pTag?.previousSibling as HTMLElement;
+        const divImgElement = this.imgDragElement.parentElement;
+
+        if (previousSibling && divImgElement) {
+          previousSibling.appendChild(divImgElement);
+        }
+        newImgElement.remove();
+        this.repositionCaption(this.imgDragElement);
+      }
+    }, 100);
+  }
+
+  repositionCaption(newImgElement: HTMLElement) {
+    const caption = document.getElementById(`caption-${this.imgDragId}`);
+    if (caption) {
+      caption.style.top =
+        newImgElement.offsetTop + newImgElement.offsetHeight + 10 + 'px';
+    }
   }
 
   checkShowToolbar() {
@@ -205,10 +249,7 @@ export class CreateArticleEditorComponent implements OnInit, OnDestroy {
           articleContentElement.prepend(divCaptionElement);
 
           captionElement.addEventListener('change', (e) => {
-            if (
-              (e.target as HTMLElement).innerText !==
-              'Caption'
-            ) {
+            if ((e.target as HTMLElement).innerText !== 'Caption') {
               placeholderElement.style.display = 'none';
             } else {
               placeholderElement.style.display = 'unset';

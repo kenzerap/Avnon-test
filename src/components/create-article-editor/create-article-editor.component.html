@@ -30,6 +30,8 @@
         #articleContent
         (input)="onContentChange($event)"
         (focus)="checkShowToolbar()"
+        (dragstart)="drag($event)"
+        (drop)="drop($event)"
       >
       </div>
 
@@ -94,11 +96,10 @@
 
 
 
-<div class="text-align">
+<div class="btn-publish">
   <button
     mat-flat-button
     color="primary"
-    class="btn"
     [disabled]="!form.valid"
     (click)="submitForm()"
   >Publish</button>

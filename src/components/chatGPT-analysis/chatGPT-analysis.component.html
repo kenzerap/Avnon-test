@@ -1,0 +1,53 @@
+<h1>
+  chatGPT Analysis
+</h1>
+
+<button
+  mat-flat-button
+  color="primary"
+  (click)="gotoDataAnalysis()"
+  class="btn-chatGPT"
+>Data Analysis</button>
+
+<form
+  [formGroup]="form"
+  class="content-container"
+>
+  <div class="prompt-content">
+    @if (form.controls.promptContent.value) {
+    <div class="question-container">
+      <div>{{form.controls.promptContent.value}}</div>
+    </div>
+    <div class="answer-container">
+      <span class="material-icons">
+        smart_toy
+      </span>
+      <div
+        class="answer-message"
+        [innerHTML]="chatGPTAnswer$ | async"
+      ></div>
+    </div>
+    }
+
+  </div>
+
+  <div class="input-bar">
+    <mat-form-field class="btn-submit">
+      <mat-label>Type something</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="questionInput"
+      >
+      <button
+        matSuffix
+        mat-icon-button
+        (click)="pushQuestion()"
+      >
+        <span class="material-icons">
+          arrow_circle_up
+        </span>
+      </button>
+    </mat-form-field>
+  </div>
+</form>

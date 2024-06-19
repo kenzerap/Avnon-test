@@ -1,0 +1,39 @@
+.content-container {
+  margin: 2rem;
+}
+
+.prompt-content {
+  height: 45rem;
+  background-color: #212121;
+  color: white;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.btn-submit {
+  width: 100%;
+}
+
+.question-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.question-container div {
+  margin: 0;
+  width: fit-content;
+  background-color: grey;
+  padding: 1rem;
+  border-radius: 25px;
+}
+
+.answer-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.answer-message {
+  white-space: pre-wrap;
+}
